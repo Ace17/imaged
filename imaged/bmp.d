@@ -53,21 +53,21 @@ class BmpEncoder : Encoder
 
         for(int y=img.height()-1;y >= 0;--y)
         {
-          ubyte[] rawLine;
-          rawLine.length = img.width() * 3;
+            ubyte[] rawLine;
+            rawLine.length = img.width() * 3;
 
-          // padding
-          rawLine.length = (rawLine.length + 3) & ~2;
+            // padding
+            rawLine.length = (rawLine.length + 3) & ~2;
 
-          for(int x=0;x < img.width(); ++x)
-          {
-            immutable pixel = img.getPixel(x, y);
-            rawLine[x*3+0] = cast(ubyte)pixel.b;
-            rawLine[x*3+1] = cast(ubyte)pixel.g;
-            rawLine[x*3+2] = cast(ubyte)pixel.r;
-          }
+            for(int x=0;x < img.width(); ++x)
+            {
+                immutable pixel = img.getPixel(x, y);
+                rawLine[x*3+0] = cast(ubyte)pixel.b;
+                rawLine[x*3+1] = cast(ubyte)pixel.g;
+                rawLine[x*3+2] = cast(ubyte)pixel.r;
+            }
 
-          fp.rawWrite(rawLine);
+            fp.rawWrite(rawLine);
         }
 
         // now we know the file size: write it.
@@ -82,20 +82,20 @@ private:
 
     static void writeLE2(ref File fp, ushort value)
     {
-      ubyte[2] data;
-      data[0] = (value >> 0) & 0xff;
-      data[1] = (value >> 8) & 0xff;
-      fp.rawWrite(data);
+        ubyte[2] data;
+        data[0] = (value >> 0) & 0xff;
+        data[1] = (value >> 8) & 0xff;
+        fp.rawWrite(data);
     }
 
     static void writeLE4(ref File fp, uint value)
     {
-      ubyte[4] data;
-      data[0] = (value >> 0) & 0xff;
-      data[1] = (value >> 8) & 0xff;
-      data[2] = (value >> 16) & 0xff;
-      data[3] = (value >> 24) & 0xff;
-      fp.rawWrite(data);
+        ubyte[4] data;
+        data[0] = (value >> 0) & 0xff;
+        data[1] = (value >> 8) & 0xff;
+        data[2] = (value >> 16) & 0xff;
+        data[3] = (value >> 24) & 0xff;
+        fp.rawWrite(data);
     }
 }
 
