@@ -37,22 +37,19 @@ class BmpEncoder : Encoder
         uint pixelOffset = 54;
         writeLE4(fp, pixelOffset);
 
-        immutable bitsPerPixel = img.bitDepth() * 3;
-        immutable bytesPerPixel = bitsPerPixel / 8;
-
         writeLE4(fp, 40); // header size
         writeLE4(fp, img.width());
         writeLE4(fp, img.height());
         writeLE2(fp, 1); // planes
-        writeLE2(fp, cast(ushort)(bitsPerPixel));
+        writeLE2(fp, cast(ushort)(img.stride()*8));
         writeLE4(fp, 0); // compression: RGB
-        writeLE4(fp, img.width() * img.height() * bytesPerPixel);
+        writeLE4(fp, img.width() * img.height() * img.stride());
         writeLE4(fp, 2835);
         writeLE4(fp, 2835);
         writeLE4(fp, 0);
         writeLE4(fp, 0);
 
-        immutable pitch = img.width()*bytesPerPixel;
+        immutable pitch = img.width()*img.stride();
 
         for(int y=img.height()-1;y >= 0;--y)
         {
