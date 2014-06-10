@@ -54,18 +54,18 @@ class BmpEncoder : Encoder
         for(int y=img.height()-1;y >= 0;--y)
         {
             ubyte[] rawLine;
-            rawLine.length = img.width() * 3;
-
-            // padding
-            rawLine.length = (rawLine.length + 3) & ~2;
 
             for(int x=0;x < img.width(); ++x)
             {
                 immutable pixel = img.getPixel(x, y);
-                rawLine[x*3+0] = cast(ubyte)pixel.b;
-                rawLine[x*3+1] = cast(ubyte)pixel.g;
-                rawLine[x*3+2] = cast(ubyte)pixel.r;
+                rawLine ~= cast(ubyte)pixel.b;
+                rawLine ~= cast(ubyte)pixel.g;
+                rawLine ~= cast(ubyte)pixel.r;
             }
+
+            // padding
+            while(rawLine.length % 4 != 0)
+                rawLine ~= 0;
 
             fp.rawWrite(rawLine);
         }
