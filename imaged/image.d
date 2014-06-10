@@ -302,10 +302,10 @@ interface Image
     }
 
     // Overload index operator to return pixel at (x,y) coords (y is measured from the top down)
-    Pixel opIndex(size_t x, size_t y, bool scaleToByte = true);
+    Pixel opIndex(size_t x, size_t y, bool scaleToByte = true) const;
 
     // Simply calls opIndex
-    Pixel getPixel(size_t x, size_t y, bool scaleToByte = true);
+    Pixel getPixel(size_t x, size_t y, bool scaleToByte = true) const;
 
     // Set the pixel at (x,y) from the given Pixel
     void setPixel(size_t x, size_t y, Pixel p);
@@ -411,7 +411,7 @@ class Img(Px F) : Image
     * 16 bit formats will only return the high bytes, effectively
     * reducing precision to 8bit.
     */
-    Pixel opIndex(size_t x, size_t y, bool scaleToByte = true)
+    Pixel opIndex(size_t x, size_t y, bool scaleToByte = true) const
     {
         auto index = getIndex(x, y);
 
@@ -504,7 +504,7 @@ class Img(Px F) : Image
 
 
     // Simply a different way of calling opIndex
-    Pixel getPixel(size_t x, size_t y, bool scaleToByte = true)
+    Pixel getPixel(size_t x, size_t y, bool scaleToByte = true) const
     {
         return this[x,y,scaleToByte];
     }
@@ -798,7 +798,7 @@ class Img(Px F) : Image
 private:
 
     // Get the byte index and bit offset for a given (x,y)
-    uint getIndex(size_t x, size_t y)
+    uint getIndex(size_t x, size_t y) const
     {
         return cast(uint)(x + y*m_width)*m_stride;
     }
