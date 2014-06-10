@@ -53,11 +53,21 @@ class BmpEncoder : Encoder
 
         for(int y=img.height()-1;y >= 0;--y)
         {
-          immutable offset = y*pitch;
-          auto pixelLine = img.pixels()[offset..offset+pitch];
-          while(pixelLine.length % 4 != 0)
-            pixelLine ~= 0;
-          fp.rawWrite(pixelLine);
+          ubyte[] rawLine;
+          rawLine.length = img.width() * 3;
+
+          // padding
+          rawLine.length = (rawLine.length + 3) & ~2;
+
+          for(int x=0;x < img.width(); ++x)
+          {
+            immutable pixel = img.getPixel(x, y);
+            rawLine[x*3+0] = cast(ubyte)pixel.b;
+            rawLine[x*3+1] = cast(ubyte)pixel.g;
+            rawLine[x*3+2] = cast(ubyte)pixel.r;
+          }
+
+          fp.rawWrite(rawLine);
         }
 
         // now we know the file size: write it.
