@@ -18,6 +18,7 @@ import
 
 import
     imaged.jpeg,
+    imaged.bmp,
     imaged.png;
 
 
@@ -62,6 +63,7 @@ Encoder getEncoder(string filename)
     switch(extension(filename))
     {
     case ".png":  enc = new PngEncoder();  break;
+    case ".bmp":  enc = new BmpEncoder();  break;
     default: writeln("Imaged: no loader for extension " ~ extension(filename));
     }
     return enc;
