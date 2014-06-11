@@ -16,6 +16,33 @@ import
 
 
 /**
+* Bmp decoder.
+*/
+class BmpDecoder : Decoder
+{
+    // Empty constructor, usefule for parsing a stream manually
+    this(in bool logging = false)
+    {
+        m_logging = logging;
+        m_image = new Img!(Px.R8G8B8)(71, 31);
+    }
+
+    this(in string filename, in bool logging = false)
+    {
+        this(logging);
+        parseFile(filename);
+    }
+
+    override void parseByte(ubyte bite)
+    {
+    }
+
+private:
+
+}
+
+
+/**
 * BMP encoder for writing out Image classes to files as BMP.
 */
 class BmpEncoder : Encoder

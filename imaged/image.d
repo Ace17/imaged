@@ -50,6 +50,7 @@ Decoder getDecoder(string filename, bool logging = false)
     case ".jpg":
     case ".jpeg": dcd = new JpegDecoder(logging); break;
     case ".png":  dcd = new PngDecoder(logging);  break;
+    case ".bmp":  dcd = new BmpDecoder(logging);  break;
     default: writeln("Imaged: no loader for extension " ~ extension(filename));
     }
     return dcd;
