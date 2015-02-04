@@ -1,19 +1,23 @@
+BIN?=bin
+
 SRCS:=\
-  ./imaged/image.d \
-  ./imaged/jpeg.d \
-  ./imaged/png.d \
-  ./imaged/bmp.d \
+  imaged/image.d \
+  imaged/jpeg.d \
+  imaged/png.d \
+  imaged/bmp.d \
 
-OBJS:=$(SRCS:%.d=%.o)
+OBJS:=$(SRCS:%.d=$(BIN)/%.o)
 
-all: test.exe
+all: $(BIN)/test.exe
 
-%.o: %.d
+$(BIN)/%.o: %.d
+	@mkdir -p $(dir $@)
 	gdc -funittest -J. -c -o $@ $^
 
-test.exe: $(OBJS) test/generate.o
+$(BIN)/test.exe: $(OBJS) $(BIN)/test/generate.o
+	@mkdir -p $(dir $@)
 	gdc -funittest -o $@ $^
 
 clean:
-	rm -f test.exe $(OBJS)
+	rm -rf $(BIN)
 
