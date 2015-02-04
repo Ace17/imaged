@@ -37,7 +37,6 @@ Image generateTestPattern()
 
 unittest
 {
-  immutable pic = cast(immutable ubyte[])import("test/bmp/test1.bmp");
 
   Image parseBuffer(const ubyte[] buffer)
   {
@@ -47,9 +46,18 @@ unittest
     return dec.image();
   }
 
-  auto img = parseBuffer(pic);
-  assert(img.width == 71);
-  assert(img.height == 31);
+  {
+    immutable pic = cast(immutable ubyte[])import("test/bmp/test1.bmp");
+    auto img = parseBuffer(pic);
+    assert(img.width == 71);
+    assert(img.height == 31);
+  }
 
+  {
+    immutable pic = cast(immutable ubyte[])import("test/bmp/test2.bmp");
+    auto img = parseBuffer(pic);
+    assert(img.width == 25);
+    assert(img.height == 17);
+  }
 }
 

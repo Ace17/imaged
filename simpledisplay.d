@@ -1173,7 +1173,7 @@ version(X11) {
 				if(!done && pulseTimeout !=0) {
 					if(handlePulse !is null)
 						handlePulse();
-					Thread.sleep(pulseTimeout * 10000);
+					Thread.sleep(dur!("msecs")(pulseTimeout));
 				}
 			}
 

@@ -35,9 +35,15 @@ class BmpDecoder : Decoder
 
     override void parseByte(ubyte bite)
     {
+      m_data ~= bite;
+      if(m_data.length == 54)
+      {
+      }
     }
 
 private:
+
+    ubyte[] m_data;
 
 }
 

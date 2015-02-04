@@ -13,3 +13,7 @@ all: test.exe
 
 test.exe: $(OBJS) test/generate.o
 	gdc -funittest -o $@ $^
+
+clean:
+	rm -f test.exe $(OBJS)
+
