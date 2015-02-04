@@ -10,6 +10,9 @@ OBJS:=$(SRCS:%.d=$(BIN)/%.o)
 
 all: $(BIN)/test.exe
 
+test: $(BIN)/test.exe
+	$(BIN)/test.exe
+
 $(BIN)/%.o: %.d
 	@mkdir -p $(dir $@)
 	gdc -funittest -J. -c -o $@ $^
