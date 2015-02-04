@@ -1,0 +1,39 @@
+{
+    "name": "imaged",
+
+    "description": "Image loading/writing library.",
+    "authors": [
+        "Callum Anderson",
+        "Stewart Gordon",
+        "Adam Ruppe (simpledisplay.d, color.d)"
+    ],
+    "homepage": "https://github.com/callumenator/imaged",
+
+    "targetType": "library",
+    "license": "BSL-1.0",
+
+    "sourcePaths": [],
+
+    "sourceFiles": [
+        "imaged/package.d",
+        "imaged/image.d",
+        "imaged/jpeg.d",
+        "imaged/png.d"
+    ],
+
+    "importPaths": ["."],
+
+    "configurations": [
+        {
+            "name": "standard",
+            "versions": []
+        },
+        {
+            "name": "opengl",
+            "versions": ["OpenGL"],
+            "dependencies": {
+                "derelict-gl3": ">=1.0.4"
+            }
+        }
+    ]
+}
